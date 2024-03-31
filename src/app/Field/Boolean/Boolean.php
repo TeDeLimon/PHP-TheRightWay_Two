@@ -8,8 +8,5 @@ use App\Field\Field;
 
 abstract class Boolean extends Field
 {
-    public function render(): string
-    {
-        return '';
-    }
+    abstract public function render(): string;
 }

@@ -24,3 +24,5 @@ $classB = new ClassB();
 echo $classA::getName() . PHP_EOL; // Output: ClassA
 echo $classB::getName() . PHP_EOL; // Output: ClassB
 
+var_dump($classA::make()); // Output: object(App\Binding\ClassA)#2 (0) { }
+var_dump($classB::make()); // Output: object(App\Binding\ClassB)#2 (0) { }

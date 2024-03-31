@@ -5,14 +5,14 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    container_name: php-the-right-way
+    container_name: tedelimon-app
     restart: always
     working_dir: /var/www/
     volumes:
       - ../src:/var/www
   nginx:
     image: nginx:latest
-    container_name: programwithgio-nginx
+    container_name: tedelimon-nginx
     restart: always
     ports:
       - 8080:80

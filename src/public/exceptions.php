@@ -31,5 +31,5 @@ try {
     // In this case, the exception is motor not running
     // If the oil level is 0 or 15 or less, the exception will be oil level is too low
 
-    echo $e->getMessage() . ' ' . $e->getFile() . ' ' . $e->getLine() . PHP_EOL;
+    echo "Message: {$e->getMessage()}, File: {$e->getFile()}, Line: {$e->getLine()}" . PHP_EOL;
 }

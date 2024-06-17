@@ -9,7 +9,7 @@ namespace App;
  */
 class Invoice
 {
-    private ?int $id;
+    public ?int $id;
 
     private ?string $accountNumber;
 
@@ -17,8 +17,9 @@ class Invoice
 
     protected ?string $category;
 
-    public function __construct(private float $amount)
+    public function __construct(public float $amount)
     {
+        $this->id = random_int(10000, 99999);
     }
 
     /**

@@ -10,24 +10,20 @@ use App\Router\Router;
 use App\Classes\Home;
 use App\Classes\Invoice;
 
-//? $_SERVER is a superglobal array that holds information about headers, paths, and script locations.
+//? REQUEST can be from multiple sources
 
-// Superglobals are built-in variables in PHP that are always accessible, regardless of scope.
+// Frontend (Javascript), Backend (PHP), Mobile (Java, Kotlin, Swift), Desktop (C++, C#), IoT (C, Python), Mobile App (React Native, Flutter), Forms...
 
-// $_SERVER is an array containing information such as headers, paths, and script locations. The entries in this array are created by the web server.
+//? When we should use GET Request? When we want to get data from the server (Fetching data from the server)
 
-// $_SERVER, $_GET, $_POST, $_FILES, $_COOKIE, $_SESSION, $_REQUEST, $_ENV
-
-// Link: https://www.php.net/manual/en/reserved.variables.server.php
-// Link: https://www.php.net/manual/en/language.variables.superglobals.php
-
-//debug($_SERVER, true, $_GET, $_POST, $_FILES, $_COOKIE, $_SESSION, $_REQUEST, $_ENV);
+//? When we should use POST Request? When we want to send data to the server, like submitting a form
 
 $router = new Router();
 
 $router
-    ->register('/', [Home::class, 'index'])
-    ->register('/invoices', [Invoice::class, 'index'])
-    ->register('/invoices/create', [Invoice::class, 'create']);
+    ->get('/', [Home::class, 'index'])
+    ->get('/invoices', [Invoice::class, 'index'])
+    ->get('/invoices/create', [Invoice::class, 'create'])
+    ->post('/invoices/create', [Invoice::class, 'store']);
 
-echo $router->resolve($_SERVER['REQUEST_URI']);
+echo $router->resolve($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

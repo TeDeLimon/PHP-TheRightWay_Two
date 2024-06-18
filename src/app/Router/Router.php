@@ -16,23 +16,63 @@ class Router
     /**
      * Register a new route.
      * 
+     * @param string $requestMethod The request method to register.
      * @param string $route The route to register.
      * @param callable|array $action The action to perform when the route is visited.
      * 
      * @return self
      */
-    public function register(string $route, callable|array $action): self
+    public function register(string $requestMethod, string $route, callable|array $action): self
     {
-        $this->routes[$route] = $action;
+        $this->routes[$requestMethod][$route] = $action;
 
         return $this;
     }
 
-    public function resolve(string $requestUri)
+    /**
+     * Register a new GET route.
+     * 
+     * @param string $route The route to register.
+     * @param callable|array $action The action to perform when the route is visited.
+     * 
+     * @return self
+     */
+    public function get(string $route, callable|array $action): self
+    {
+        return $this->register('GET', $route, $action);
+    }
+
+    /**
+     * Register a new POST route.
+     * 
+     * @param string $route The route to register.
+     * @param callable|array $action The action to perform when the route is visited.
+     * 
+     * @return self
+     */
+    public function post(string $route, callable|array $action): self
+    {
+        return $this->register('POST', $route, $action);
+    }
+
+    public function getRoutes(): array
+    {
+        return $this->routes;
+    }
+
+    /**
+     * Resolve the route.
+     * 
+     * @param string $requestUri The request URI to resolve.
+     * @param string $requestMethod The request method to resolve.
+     * 
+     * @return mixed
+     */
+    public function resolve(string $requestUri, string $requestMethod)
     {
         $route = explode('?', $requestUri)[0];
 
-        $action = $this->routes[$route] ?? null;
+        $action = $this->routes[$requestMethod][$route] ?? null;
 
         if (!$action) {
 
@@ -56,7 +96,7 @@ class Router
             throw new RouteNotFoundException();
         }
 
-        if(!method_exists($class, $method)) {
+        if (!method_exists($class, $method)) {
 
             throw new RouteNotFoundException();
         }

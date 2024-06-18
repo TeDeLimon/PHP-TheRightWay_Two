@@ -6,6 +6,6 @@ class Home
 {
     public function index()
     {
-        return 'Home page';
+        return 'Home Page';
     }
 }

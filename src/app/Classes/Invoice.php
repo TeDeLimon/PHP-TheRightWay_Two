@@ -23,7 +23,7 @@ class Invoice
         HTML;
 
         return $form;
-    } 
+    }
 
     public function store(): string
     {

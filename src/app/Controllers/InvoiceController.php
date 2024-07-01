@@ -29,12 +29,11 @@ class InvoiceController
     /**
      * Almacena una factura en la base de datos.
      */
-    public function store(): View
+    public function store()
     {
         $amount = $_POST['amount'] ?? 0;
 
-        debug($amount, true);
-
-        return View::make('invoice/index');
+        // This will set the HTTP response status code to 302 and redirect the user to the specified URL
+        header('Location: /');
     }
 }

@@ -19,6 +19,18 @@ class HomeController
     }
 
     /**
+     * Descarga un archivo del servidor.
+     */
+    public function download() {
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="receipt.pdf"');
+
+        readfile(STORAGE_DIR . '/screenshot.png');
+
+        unlink(STORAGE_DIR . '/screenshot.png');
+    }
+
+    /**
      * Sube un archivo al servidor. 
      * 
      * $_FILES es un array asociativo con la información de los archivos subidos al servidor.

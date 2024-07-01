@@ -1,28 +1,21 @@
 <?php
 
-namespace App\Classes;
+namespace App\Controllers;
 
-class Home
+use App\Classes\View;
+
+class HomeController
 {
     /**
      * Genera un formulario para subir un archivo.
      * 
      * @link https://www.php.net/manual/es/reserved.variables.files.php
+     * 
+     * @return string|bool  Contenido de la vista. If output buffering isn't active then false is returned
      */
-    public function index()
+    public function index(): View
     {
-
-        // The name will be the key in the $_FILES array.
-
-        return <<<HTML
-
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input type="file" name="receipt[]" />
-                <input type="file" name="receipt[]" />
-                <button type="submit">Upload</button>
-            </form>
-
-        HTML;
+        return View::make('home/index',  ['title' => 'Subir Archivo']);
     }
 
     /**

@@ -68,7 +68,7 @@ class Router
      * 
      * @return mixed
      */
-    public function resolve(string $requestUri, string $requestMethod)
+    public function resolve(string $requestUri, string $requestMethod): mixed
     {
         $route = explode('?', $requestUri)[0];
 
